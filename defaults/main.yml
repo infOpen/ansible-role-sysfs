@@ -1,0 +1,16 @@
+---
+
+# Defaults vars file for sysfs role
+
+# Package management
+sysfs_packages: "{{ _sysfs_packages | default([]) }}"
+
+# Service management
+sysfs_service_file_path: "{{ _sysfs_service_file_path | default('') }}"
+sysfs_service_name: "{{ _sysfs_service_name | default('') }}"
+sysfs_service_enabled: True
+
+# Configuration management
+sysfs_config: "{{ _sysfs_config }}"
+sysfs_dependent_services: []
+sysfs_rules: []

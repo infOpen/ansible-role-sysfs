@@ -1,0 +1,12 @@
+---
+
+# Install tasks for Debian family
+#------------------------------------------------------------------------------
+
+- name: 'INSTALL | APT | Install sys FS utils packages'
+  apt:
+    name: "{{ item.name }}"
+    version: "{{ item.version | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  notify: 'HANDLER | Restart sysfsutils service'
+  with_items: "{{ sysfs_packages }}"

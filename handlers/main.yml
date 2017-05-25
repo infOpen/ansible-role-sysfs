@@ -1,0 +1,12 @@
+---
+
+# Handlers main file for sysfs role
+
+- name: 'HANDLER | Restart sysfsutils service'
+  become: True
+  service:
+    name: "{{ sysfs_service_name }}"
+    state: 'restarted'
+  tags:
+    - 'role::sysfs'
+    - 'role::sysfs::install'
