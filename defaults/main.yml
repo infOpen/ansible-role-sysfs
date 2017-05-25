@@ -1,3 +1,9 @@
 ---
 
 # Defaults vars file for sysfs role
+
+# Package management
+sysfs_packages: "{{ _sysfs_packages | default([]) }}"
+
+# Service management
+sysfs_service_name: "{{ _sysfs_service_name | default('') }}"

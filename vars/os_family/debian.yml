@@ -1,0 +1,10 @@
+---
+
+# Debian family OS variables
+
+# System prerequisites
+_sysfs_packages:
+  - name: 'sysfsutils'
+
+# Service management
+_sysfs_service_name: 'sysfsutils'
