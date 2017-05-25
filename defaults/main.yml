@@ -7,3 +7,7 @@ sysfs_packages: "{{ _sysfs_packages | default([]) }}"
 
 # Service management
 sysfs_service_name: "{{ _sysfs_service_name | default('') }}"
+
+# Configuration management
+sysfs_rules: []
+sysfs_config: "{{ _sysfs_config }}"

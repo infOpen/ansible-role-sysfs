@@ -8,3 +8,9 @@ _sysfs_packages:
 
 # Service management
 _sysfs_service_name: 'sysfsutils'
+
+# Configuration management
+_sysfs_config:
+  files: {}
+  folder:
+    path: '/etc/sysfs.d'

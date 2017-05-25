@@ -1,0 +1,23 @@
+---
+
+# Sys FS configuration tasks
+
+- name: 'CONFIG | Ensure rules directory exists'
+  file:
+    dest: "{{ sysfs_config.folder.path }}"
+    owner: "{{ sysfs_config.folder.owner | default('root') }}"
+    group: "{{ sysfs_config.folder.group | default('root') }}"
+    mode: "{{ sysfs_config.folder.mode | default('0700') }}"
+    state: 'directory'
+  notify: 'HANDLER | Restart sysfsutils service'
+
+
+- name: 'CONFIG | Manage sys FS rules'
+  template:
+    src: "{{ role_path }}/templates/sysfs_rules.conf.j2"
+    dest: "{{ sysfs_config.folder.path }}/{{ item.filename }}"
+    owner: "{{ sysfs_config.files.owner | default('root') }}"
+    group: "{{ sysfs_config.files.group | default('root') }}"
+    mode: "{{ sysfs_config.files.mode | default('0400') }}"
+  notify: 'HANDLER | Restart sysfsutils service'
+  with_items: "{{ sysfs_rules }}"

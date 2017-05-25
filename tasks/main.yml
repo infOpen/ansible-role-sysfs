@@ -15,3 +15,11 @@
   tags:
     - 'role::sysfs'
     - 'role::sysfs::install'
+
+
+- name: 'CONFIG | Manage sysfs rules tasks'
+  include: "{{ role_path }}/tasks/manage_config.yml"
+  become: True
+  tags:
+    - 'role::sysfs'
+    - 'role::sysfs::config'

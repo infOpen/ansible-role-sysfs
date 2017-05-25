@@ -1,5 +1,5 @@
 """
-Role tests
+Role installation tests
 """
 
 from testinfra.utils.ansible_runner import AnsibleRunner
