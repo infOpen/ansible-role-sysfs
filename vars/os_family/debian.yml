@@ -1,0 +1,17 @@
+---
+
+# Debian family OS variables
+
+# System prerequisites
+_sysfs_packages:
+  - name: 'sysfsutils'
+
+# Service management
+_sysfs_service_name: 'sysfsutils'
+_sysfs_service_file_path: '/etc/init.d/sysfsutils'
+
+# Configuration management
+_sysfs_config:
+  files: {}
+  folder:
+    path: '/etc/sysfs.d'
