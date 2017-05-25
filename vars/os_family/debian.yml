@@ -8,6 +8,7 @@ _sysfs_packages:
 
 # Service management
 _sysfs_service_name: 'sysfsutils'
+_sysfs_service_file_path: '/etc/init.d/sysfsutils'
 
 # Configuration management
 _sysfs_config:

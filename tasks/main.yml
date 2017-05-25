@@ -23,3 +23,12 @@
   tags:
     - 'role::sysfs'
     - 'role::sysfs::config'
+
+
+- name: 'CONFIG | Manage sysfs service'
+  include: "{{ role_path }}/tasks/manage_service.yml"
+  become: True
+  tags:
+    - 'role::sysfs'
+    - 'role::sysfs::config'
+    - 'role::sysfs::install'
