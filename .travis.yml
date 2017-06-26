@@ -18,6 +18,7 @@ env:
     - TOXENV='py27-ansible23'
 
 before_install:
+  - 'sudo docker --version'
   - 'sudo apt-get update -qq'
   - 'sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine'
 
