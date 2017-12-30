@@ -9,13 +9,32 @@ testinfra_hosts = AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_hosts_file(host):
+def test_packages(host):
     """
-    Ensure /etc/hosts file exists
+    Test if needed packages installed
     """
 
-    f = host.file('/etc/hosts')
+    packages = []
 
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+    if host.system_info.distribution in ('debian', 'ubuntu'):
+        packages = ['sysfsutils']
+
+    for package in packages:
+        assert host.package(package).is_installed
+
+
+def test_sysfs_utils_service(host):
+    """
+    Test if sys FS utils service started
+    """
+
+    service = ''
+
+    if host.system_info.distribution in ('debian', 'ubuntu'):
+        service = 'sysfsutils'
+
+    assert host.service(service).is_enabled
+
+    # Systemctl not available with Docker images
+    if 'docker' != host.backend.NAME:
+        assert host.service(service).is_running
