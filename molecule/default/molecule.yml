@@ -14,10 +14,11 @@ platforms:
       - 'SYS_PTRACE'
     privileged: True
   - name: "sysfs-docker-xenial"
-    image: 'ubuntu:xenial'
+    image: 'solita/ubuntu-systemd:16.04'
     cap_add:
       - 'SYS_PTRACE'
     privileged: True
+    command: '/sbin/init'
   - name: "sysfs-docker-trusty"
     image: 'ubuntu:trusty'
     cap_add:

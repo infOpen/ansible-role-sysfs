@@ -35,6 +35,6 @@ def test_sysfs_utils_service(host):
 
     assert host.service(service).is_enabled
 
-    # Systemctl not available with Docker images
-    if 'docker' != host.backend.NAME:
+    # Ststus is not available with Trusty init.d file
+    if host.system_info.codename != 'trusty':
         assert host.service(service).is_running
