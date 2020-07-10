@@ -2,17 +2,9 @@
 
 # Service management tasks
 
-- name: 'Define dependent services'
-  lineinfile:
-    dest: "{{ sysfs_service_file_path }}"
-    insertafter: '^# Required-Start'
-    line: "# X-Start-Before:    {{ sysfs_dependent_services | join (' ') }}"
-    regexp: '^# X-Start-Before:'
-    state: 'present'
-  notify: 'HANDLER | Restart sysfsutils service'
-
-
 - name: 'Manage service settings'
+  become: True
   service:
     name: "{{ sysfs_service_name }}"
     enabled: "{{ sysfs_service_enabled }}"
+  when: 'sysfs_service_name | bool'
