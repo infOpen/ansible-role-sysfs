@@ -1,11 +1,11 @@
 ---
 
-# Install tasks for Debian family
+# Install tasks for Redhat family
 # -----------------------------------------------------------------------------
 
-- name: 'INSTALL | APT | Install sys FS utils packages'
+- name: 'INSTALL | YUM | Install sys FS utils packages'
   become: True
-  apt:
+  yum:
     name: "{{ item.name }}"
     version: "{{ item.version | default(omit) }}"
     state: "{{ item.state | default('present') }}"

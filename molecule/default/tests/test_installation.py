@@ -1,10 +1,13 @@
 """
-Role configuration tests
+Role tests
 """
 
+import os
+import pytest
 from testinfra.utils.ansible_runner import AnsibleRunner
 
-testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
+testinfra_hosts = AnsibleRunner(
+    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
 def test_rules_folder(host):
@@ -54,24 +57,20 @@ def test_rules_files(host):
     assert expected_content.issubset(file_content_set)
 
 
-def test_sysfs_rules(host):
+def test_packages(host):
     """
-    Check sysfs rules
+    Test if needed packages installed
     """
 
-    rules = []
+    assert host.package('sysfsutils').is_installed
 
-    if host.system_info.distribution in ('debian', 'ubuntu'):
-        rules = [
-            (
-                '/sys/kernel/mm/transparent_hugepage/defrag',
-                'always madvise [never]'
-            ),
-            (
-                '/sys/kernel/mm/transparent_hugepage/enabled',
-                'always madvise [never]'
-            ),
-        ]
 
-    for rule in rules:
-        assert host.check_output('cat {}'.format(rule[0])) == rule[1]
+def test_sysfs_utils_service(host):
+    """
+    Test if sys FS utils service started
+    """
+
+    if host.system_info.distribution not in ('debian', 'ubuntu'):
+        pytest.skip('Test defined for another distribution')
+
+    assert host.service('sysfsutils').is_enabled

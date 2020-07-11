@@ -3,31 +3,30 @@
 # Main tasks file for sysfs role
 
 - name: 'INIT | Manage variables to use for our target'
-  include: "{{ role_path }}/tasks/manage_variables.yml"
+  import_tasks: "{{ role_path }}/tasks/manage_variables.yml"
   tags:
     - 'role::sysfs'
+    - 'role::sysfs::config'
     - 'role::sysfs::init'
+    - 'role::sysfs::install'
 
 
 - name: 'INSTALL | Manage sysfs utils installation tasks'
-  include: "{{ role_path }}/tasks/install/{{ ansible_os_family | lower }}_family.yml"
-  become: True
+  include_tasks: "{{ role_path }}/tasks/install/{{ ansible_os_family | lower }}_family.yml"
   tags:
     - 'role::sysfs'
     - 'role::sysfs::install'
 
 
 - name: 'CONFIG | Manage sysfs rules tasks'
-  include: "{{ role_path }}/tasks/manage_config.yml"
-  become: True
+  include_tasks: "{{ role_path }}/tasks/manage_config.yml"
   tags:
     - 'role::sysfs'
     - 'role::sysfs::config'
 
 
 - name: 'CONFIG | Manage sysfs service'
-  include: "{{ role_path }}/tasks/manage_service.yml"
-  become: True
+  include_tasks: "{{ role_path }}/tasks/manage_service.yml"
   tags:
     - 'role::sysfs'
     - 'role::sysfs::config'
